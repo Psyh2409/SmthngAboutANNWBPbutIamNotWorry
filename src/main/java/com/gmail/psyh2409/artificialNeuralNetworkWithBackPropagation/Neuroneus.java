@@ -50,4 +50,13 @@ public class Neuroneus implements Passer {
     public double reActivationSigmoid(double mistake) {
         return mistake * (1 - mistake);
     }
+
+    public void studying () {
+        double jump = 0.1;
+        for (Synapse s: outs) {
+            s.setJustice(
+                    s.getJustice() + mistake * reActivationSigmoid(
+                    s.getWeightedOutMistake()) * out * jump);
+        }
+    }
 }

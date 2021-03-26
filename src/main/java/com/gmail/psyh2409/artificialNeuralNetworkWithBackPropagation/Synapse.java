@@ -10,6 +10,7 @@ public class Synapse implements Passer {
     private double justice;
     private Passer outNeuroneus;
     private double weightedOutMistake;
+    private double OutMistake;
     private double inDouble;
 
     public Synapse() {
@@ -42,8 +43,14 @@ public class Synapse implements Passer {
     public double backLifeCircle() {
         weightedOutMistake = weighting(
                 outNeuroneus instanceof Neuroneus
-                        ? ((Neuroneus) outNeuroneus).getMistake()*justice
+                        ? OutMistake = ((Neuroneus) outNeuroneus).getMistake()*justice
                         : 0*justice);
         return weightedOutMistake;
     }
+
+    @Override
+    public void studying() {
+        outNeuroneus.studying();
+    }
+
 }

@@ -26,4 +26,9 @@ public class Outputer implements Passer{
     public double backLifeCircle() {
         return 0;
     }
+
+    @Override
+    public void studying() {
+
+    }
 }

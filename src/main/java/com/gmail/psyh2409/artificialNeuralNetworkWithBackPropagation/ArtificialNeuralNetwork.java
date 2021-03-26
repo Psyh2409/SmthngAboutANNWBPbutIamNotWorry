@@ -13,10 +13,6 @@ public class ArtificialNeuralNetwork {
     private final static double[] goals = new double[outs];
     private final static double[] mistakes = new double[outs];
 
-    private static void studying(){
-        mistakeCalculator();
-    }
-
     private static void mistakeCalculator() {
         for (int i = 0; i < outs; i++) {
             mistakes[i] = goals[i] - oOuts[i];
@@ -38,9 +34,11 @@ public class ArtificialNeuralNetwork {
     }
 
     public static void main(String[] args) {
-        Neuroneus[][] nLayer = nInitializer();
-        Synapse[][] wLayer = wInitializer(nLayer);
-        lifeCircle(nLayer, wLayer, 123, 321);
+        for (int i = 0; i < 1000; i++) {
+            Neuroneus[][] nLayer = nInitializer();
+            Synapse[][] wLayer = wInitializer(nLayer);
+            lifeCircle(nLayer, wLayer, 1, 999);
+        }
     }
 
     public static void lifeCircle(Neuroneus[][] nLayer, Synapse[][] wLayer, int from, int to) {
@@ -70,6 +68,8 @@ public class ArtificialNeuralNetwork {
             int y = 0;
             for (Neuroneus n : nLayer[nLayer.length - 1]) {
                 oOuts[y] = n.forwardLifeCircle();
+                n.backLifeCircle();
+                n.studying();
                 System.out.printf("\t" + ++y + ": %.2f \t", oOuts[y-1]);
             }
             System.out.println();
@@ -77,6 +77,12 @@ public class ArtificialNeuralNetwork {
                 System.out.println("currentInt: " + currentInt + " oOut" + (i+1) + ": " + oOuts[i] + " goal" +
                         (i+1) + ": " + goals[i] + " mistake" + (i+1) + ": " + mistakes[i]);
             }
+
+//            for (int i = 0; i < nLayer.length; i++) { // it is something about run back propagation, but I still don't wary.
+//                for (int j = 0; j < nLayer[i].length; j++) {
+//                    nLayer[i][j].backLifeCircle();
+//                }
+//            }
         }
     }
 

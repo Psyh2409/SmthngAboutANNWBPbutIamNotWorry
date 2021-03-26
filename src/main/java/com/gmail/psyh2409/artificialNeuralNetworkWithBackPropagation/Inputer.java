@@ -10,4 +10,9 @@ public class Inputer implements Passer{
     public double backLifeCircle() {
         return 0;
     }
+
+    @Override
+    public void studying() {
+
+    }
 }
