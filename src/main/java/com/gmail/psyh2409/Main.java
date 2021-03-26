@@ -1,3 +1,7 @@
+// It is other code from other project. Yes, it is unnormaly. I know. 
+// But it is my GitHub! Welcome, but might be you want to see something about Artifitial Neural Network With Back Propagation, so it isn't here.
+// Sorry Bro? May by try search it in other folders of this project. Good luck, Bro!
+
 package com.gmail.psyh2409;
 
 import org.jsoup.Jsoup;
