@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ArtificialNeuralNetwork {
-    private final static int ins = 3;
-    private final static int hiddenLayer = 4;
-    private final static int hLCount = 3;
+    private final static int ins = 2;
+    private final static int hiddenLayer = 3;
+    private final static int hLCount = 1;
     private final static int outs = 1;
     private static int currentInt;
     private final static double[] oOuts = new double[outs];
@@ -34,10 +34,11 @@ public class ArtificialNeuralNetwork {
     }
 
     public static void main(String[] args) {
-        for (int i = 0; i < 1000; i++) {
+
             Neuroneus[][] nLayer = nInitializer();
             Synapse[][] wLayer = wInitializer(nLayer);
-            lifeCircle(nLayer, wLayer, 1, 999);
+        for (int i = 0; i < 10; i++) {
+            lifeCircle(nLayer, wLayer, 0, 10);
         }
     }
 
@@ -45,7 +46,7 @@ public class ArtificialNeuralNetwork {
         for (int x = from; x < to+1; x++) {
             currentInt = x;
             goalsInitializer();
-            mistakeCalculator();
+
             Neuroneus[] neuroneuses = nLayer[0];
             int[] arrOfDigits = toDigitArrayWithFixedCapacity(x);
             for (int i = 0; i < neuroneuses.length; i++) {
@@ -68,11 +69,14 @@ public class ArtificialNeuralNetwork {
             int y = 0;
             for (Neuroneus n : nLayer[nLayer.length - 1]) {
                 oOuts[y] = n.forwardLifeCircle();
+                mistakeCalculator();
                 n.backLifeCircle();
                 n.studying();
+
                 System.out.printf("\t" + ++y + ": %.2f \t", oOuts[y-1]);
             }
-            System.out.println();
+            y = 0;
+             System.out.println();
             for (int i = 0; i < oOuts.length; i++) {
                 System.out.println("currentInt: " + currentInt + " oOut" + (i+1) + ": " + oOuts[i] + " goal" +
                         (i+1) + ": " + goals[i] + " mistake" + (i+1) + ": " + mistakes[i]);

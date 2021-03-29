@@ -15,6 +15,11 @@ public class Bias extends Neuroneus implements Passer {
 
     @Override
     public double backLifeCircle() {
-        return 0;
+        double result = 0;
+        for (Synapse s: this.getOuts()) {
+            result += s.getWeightedOutMistake();
+        }
+        this.setMistake(reActivationSigmoid(result));
+        return getMistake()*0;
     }
 }

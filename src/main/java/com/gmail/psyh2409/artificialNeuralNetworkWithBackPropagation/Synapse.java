@@ -36,13 +36,17 @@ public class Synapse implements Passer {
     @Override
     public double forwardLifeCircle() {
         inDouble = inNeuroneus.forwardLifeCircle();
-        return weighting(inDouble);
+        double weightedOut = weighting(inDouble);
+        if (outNeuroneus instanceof Neuroneus) {
+            ((Neuroneus) outNeuroneus).getIns().add(weightedOut);
+        }
+        return weightedOut;
     }
 
     @Override
     public double backLifeCircle() {
         weightedOutMistake = weighting(
-                outNeuroneus instanceof Neuroneus
+                !(outNeuroneus instanceof Bias)
                         ? OutMistake = ((Neuroneus) outNeuroneus).getMistake()*justice
                         : 0*justice);
         return weightedOutMistake;
