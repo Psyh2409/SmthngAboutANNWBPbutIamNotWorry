@@ -12,6 +12,8 @@ public class ArtificialNeuralNetwork {
     private final static double[] oOuts = new double[outs];
     private final static double[] goals = new double[outs];
     private final static double[] mistakes = new double[outs];
+    private static Neuroneus[][] nLayer;
+    static Synapse[][] wLayer;
 
     private static void mistakeCalculator() {
         for (int i = 0; i < outs; i++) {
@@ -35,8 +37,8 @@ public class ArtificialNeuralNetwork {
 
     public static void main(String[] args) {
 
-            Neuroneus[][] nLayer = nInitializer();
-            Synapse[][] wLayer = wInitializer(nLayer);
+            nLayer = nInitializer();
+            wLayer = wInitializer(nLayer);
         for (int i = 0; i < 10; i++) {
             lifeCircle(nLayer, wLayer, 0, 10);
         }
@@ -104,7 +106,9 @@ public class ArtificialNeuralNetwork {
                         wLayer[i][w] = new UnSynapse(before, after);
                     }
                     wLayer[i][w].setOutNeuroneus(after);
-                    before.getOuts().add(wLayer[i][w]);
+//                    before.getOuts().add(wLayer[i][w]);
+                    Integer[] arr = new Integer[]{i, w};
+                    before.getOuts().add(arr);
                     w++;
                 }
             }

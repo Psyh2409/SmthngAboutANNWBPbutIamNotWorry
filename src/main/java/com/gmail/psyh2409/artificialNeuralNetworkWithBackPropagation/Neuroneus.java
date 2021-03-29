@@ -6,6 +6,8 @@ import lombok.EqualsAndHashCode;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.gmail.psyh2409.artificialNeuralNetworkWithBackPropagation.ArtificialNeuralNetwork.wLayer;
+
 @Data
 @EqualsAndHashCode
 public class Neuroneus implements Passer {
@@ -14,7 +16,8 @@ public class Neuroneus implements Passer {
     private double sum;
     private double mistake;
     private double out;
-    private List<Synapse> outs;
+//    private List<Synapse> outs;
+    private List<Integer[]> outs;
 
     public Neuroneus() {
         ins = new ArrayList<>();
@@ -40,8 +43,8 @@ public class Neuroneus implements Passer {
     @Override
     public double backLifeCircle() {
         double result = 0;
-        for (Synapse s: outs) {
-            result += s.getWeightedOutMistake();
+        for (Integer[] arr: this.getOuts()) {
+            result += wLayer[arr[0]][arr[1]].getWeightedOutMistake();
         }
         mistake = reActivationSigmoid(result);
         return mistake;
@@ -53,9 +56,10 @@ public class Neuroneus implements Passer {
 
     public void studying () {
         double jump = 0.1;
-        for (Synapse s: outs) {
-            double newJustice = s.getJustice() + mistake * reActivationSigmoid(
-                    s.getWeightedOutMistake()) * out * jump;
-            s.setJustice(newJustice);        }
+        double result = 0;
+        for (Integer[] arr: this.getOuts()) {
+            double newJustice = wLayer[arr[0]][arr[1]].getJustice() + mistake * reActivationSigmoid(
+                    wLayer[arr[0]][arr[1]].getWeightedOutMistake()) * out * jump;
+            wLayer[arr[0]][arr[1]].setJustice(newJustice);        }
     }
 }

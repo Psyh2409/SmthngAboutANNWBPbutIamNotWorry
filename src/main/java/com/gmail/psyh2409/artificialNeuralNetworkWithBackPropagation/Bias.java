@@ -3,6 +3,8 @@ package com.gmail.psyh2409.artificialNeuralNetworkWithBackPropagation;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import static com.gmail.psyh2409.artificialNeuralNetworkWithBackPropagation.ArtificialNeuralNetwork.wLayer;
+
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class Bias extends Neuroneus implements Passer {
@@ -16,8 +18,8 @@ public class Bias extends Neuroneus implements Passer {
     @Override
     public double backLifeCircle() {
         double result = 0;
-        for (Synapse s: this.getOuts()) {
-            result += s.getWeightedOutMistake();
+        for (Integer[] arr: this.getOuts()) {
+            result += wLayer[arr[0]][arr[1]].getWeightedOutMistake();
         }
         this.setMistake(reActivationSigmoid(result));
         return getMistake()*0;
