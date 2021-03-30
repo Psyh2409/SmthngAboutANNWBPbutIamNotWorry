@@ -7,7 +7,7 @@ public class Inputer implements Passer{
     }
 
     @Override
-    public double backLifeCircle() {
+    public double backLifeCircle(double [] mistakes) {
         return 0;
     }
 

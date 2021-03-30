@@ -44,7 +44,7 @@ public class Synapse implements Passer {
     }
 
     @Override
-    public double backLifeCircle() {
+    public double backLifeCircle(double [] mistakes) {
         weightedOutMistake = weighting(
                 !(outNeuroneus instanceof Bias)
                         ? OutMistake = ((Neuroneus) outNeuroneus).getMistake()*justice

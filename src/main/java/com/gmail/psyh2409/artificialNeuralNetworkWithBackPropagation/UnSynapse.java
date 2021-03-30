@@ -21,4 +21,9 @@ public class UnSynapse extends Synapse implements Passer {
     public double forwardLifeCircle() {
         return weighting(0);
     }
+
+    @Override
+    public double backLifeCircle(double[] mistakes) {
+        return 0;
+    }
 }

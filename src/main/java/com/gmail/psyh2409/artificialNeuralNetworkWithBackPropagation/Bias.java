@@ -16,7 +16,7 @@ public class Bias extends Neuroneus implements Passer {
     }
 
     @Override
-    public double backLifeCircle() {
+    public double backLifeCircle(double [] mistakes) {
         double result = 0;
         for (Integer[] arr: this.getOuts()) {
             result += wLayer[arr[0]][arr[1]].getWeightedOutMistake();

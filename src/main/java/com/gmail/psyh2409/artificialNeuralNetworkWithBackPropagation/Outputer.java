@@ -23,7 +23,7 @@ public class Outputer implements Passer{
     }
 
     @Override
-    public double backLifeCircle() {
+    public double backLifeCircle(double [] mistakes) {
         return 0;
     }
 

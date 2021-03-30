@@ -72,7 +72,7 @@ public class ArtificialNeuralNetwork {
             for (Neuroneus n : nLayer[nLayer.length - 1]) {
                 oOuts[y] = n.forwardLifeCircle();
                 mistakeCalculator();
-                n.backLifeCircle();
+                n.backLifeCircle(mistakes);
                 n.studying();
 
                 System.out.printf("\t" + ++y + ": %.2f \t", oOuts[y-1]);

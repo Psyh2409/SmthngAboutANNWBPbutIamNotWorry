@@ -4,7 +4,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.OptionalDouble;
+import java.util.function.DoubleBinaryOperator;
 
 import static com.gmail.psyh2409.artificialNeuralNetworkWithBackPropagation.ArtificialNeuralNetwork.wLayer;
 
@@ -16,7 +19,6 @@ public class Neuroneus implements Passer {
     private double sum;
     private double mistake;
     private double out;
-//    private List<Synapse> outs;
     private List<Integer[]> outs;
 
     public Neuroneus() {
@@ -41,22 +43,29 @@ public class Neuroneus implements Passer {
     }
 
     @Override
-    public double backLifeCircle() {
+    public double backLifeCircle(double[] mistakes) {
         double result = 0;
+        OptionalDouble mistakesSum = Arrays.stream(mistakes).reduce(new DoubleBinaryOperator() {
+            @Override
+            public double applyAsDouble(double left, double right) {
+                return left + right;
+            }
+        });
         for (Integer[] arr: this.getOuts()) {
             result += wLayer[arr[0]][arr[1]].getWeightedOutMistake();
         }
-        mistake = reActivationSigmoid(result);
+        mistake = reActivationSigmoid(mistakesSum.getAsDouble());
         return mistake;
     }
 
-    public double reActivationSigmoid(double mistake) {
-        return (mistake+0.1) * (1 - mistake-0.1);
+    public double reActivationSigmoid(double num) {
+        double a = (num+0.1);
+        double b = (1 - num-0.1);
+        return a*b;
     }
 
     public void studying () {
         double jump = 0.1;
-        double result = 0;
         for (Integer[] arr: this.getOuts()) {
             double newJustice = wLayer[arr[0]][arr[1]].getJustice() + mistake * reActivationSigmoid(
                     wLayer[arr[0]][arr[1]].getWeightedOutMistake()) * out * jump;
